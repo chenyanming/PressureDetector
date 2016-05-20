@@ -6,6 +6,7 @@
 
 class Console : public QTextEdit
 {
+    Q_OBJECT
 public:
     Console();
     void serialReceived(const QByteArray &data);

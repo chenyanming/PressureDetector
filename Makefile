@@ -201,6 +201,9 @@ Makefile: PressureDetector.pro C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\win32-msvc2015
 		C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\resolve_config.prf \
 		C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\exclusive_builds_post.prf \
 		C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\default_post.prf \
+		C:\Qwt-6.1.2\features\qwtconfig.pri \
+		C:\Qwt-6.1.2\features\qwtfunctions.pri \
+		C:\Qwt-6.1.2\features\qwt.prf \
 		C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\qml_debug.prf \
 		C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\win32\rtti.prf \
 		C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\precompile_header.prf \
@@ -217,6 +220,7 @@ Makefile: PressureDetector.pro C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\win32-msvc2015
 		C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\lex.prf \
 		PressureDetector.pro \
 		C:\Qt\Qt5.6.0\5.6\msvc2015\lib\qtmaind.prl \
+		C:\Qt\Qt5.6.0\5.6\msvc2015\lib\Qt5Svg.prl \
 		C:\Qt\Qt5.6.0\5.6\msvc2015\lib\Qt5Widgets.prl \
 		C:\Qt\Qt5.6.0\5.6\msvc2015\lib\Qt5Gui.prl \
 		C:\Qt\Qt5.6.0\5.6\msvc2015\lib\Qt5SerialPort.prl \
@@ -350,6 +354,9 @@ C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\win32\default_pre.prf:
 C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\resolve_config.prf:
 C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\exclusive_builds_post.prf:
 C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\default_post.prf:
+C:\Qwt-6.1.2\features\qwtconfig.pri:
+C:\Qwt-6.1.2\features\qwtfunctions.pri:
+C:\Qwt-6.1.2\features\qwt.prf:
 C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\qml_debug.prf:
 C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\win32\rtti.prf:
 C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\precompile_header.prf:
@@ -366,6 +373,7 @@ C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\yacc.prf:
 C:\Qt\Qt5.6.0\5.6\msvc2015\mkspecs\features\lex.prf:
 PressureDetector.pro:
 C:\Qt\Qt5.6.0\5.6\msvc2015\lib\qtmaind.prl:
+C:\Qt\Qt5.6.0\5.6\msvc2015\lib\Qt5Svg.prl:
 C:\Qt\Qt5.6.0\5.6\msvc2015\lib\Qt5Widgets.prl:
 C:\Qt\Qt5.6.0\5.6\msvc2015\lib\Qt5Gui.prl:
 C:\Qt\Qt5.6.0\5.6\msvc2015\lib\Qt5SerialPort.prl:
