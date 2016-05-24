@@ -17,12 +17,16 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     console.cpp \
     samplingthread.cpp \
-    signaldata.cpp
+    signaldata.cpp \
+    plot.cpp \
+    curvedata.cpp
 
 HEADERS  += mainwindow.h \
     console.h \
     samplingthread.h \
-    signaldata.h
+    signaldata.h \
+    plot.h \
+    curvedata.h
 
 FORMS    += mainwindow.ui
 

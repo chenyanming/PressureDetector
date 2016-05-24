@@ -13,6 +13,7 @@
 #include <QtMath>
 #include <qwt_point_data.h>
 
+#include "plot.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -54,33 +55,39 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     // ! [3]
-    QwtPlot *plot = new QwtPlot(QwtText("Figure"));
-    plot->resize(600, 400);
-    plot->setAxisTitle(QwtPlot::xBottom, "x");
-    plot->setAxisTitle(QwtPlot::yLeft, "y");
-    plot->setAxisScale(QwtPlot::xBottom, 0.0, 10.0);
-    plot->setAxisScale(QwtPlot::yLeft, -1.0, 1.0);
-    plot->insertLegend(new QwtLegend(), QwtPlot::RightLegend);
-    (void) new QwtPlotMagnifier(plot->canvas());
-    (void) new QwtPlotPanner(plot->canvas());
+//    QwtPlot *plot = new QwtPlot(QwtText("Figure"));
+//    plot->resize(600, 400);
+//    plot->setAxisTitle(QwtPlot::xBottom, "x");
+//    plot->setAxisTitle(QwtPlot::yLeft, "y");
+//    plot->setAxisScale(QwtPlot::xBottom, 0.0, 10.0);
+//    plot->setAxisScale(QwtPlot::yLeft, -1.0, 1.0);
+//    plot->insertLegend(new QwtLegend(), QwtPlot::RightLegend);
+//    (void) new QwtPlotMagnifier(plot->canvas());
+//    (void) new QwtPlotPanner(plot->canvas());
 
-    QVector<double> xs, ys;
-    for (double x = 0; x < 15.0 ; x++)
-    {
-        xs.append(x);
-        ys.append(qSin(x));
-    }
+//    QVector<double> xs, ys;
+//    for (double x = 0; x < 15.0 ; x++)
+//    {
+//        xs.append(x);
+//        ys.append(qSin(x));
+//    }
     //qDebug() << ys;
 
     // ![4]
-    QwtPointArrayData *curveData = new QwtPointArrayData(xs, ys);
-    QwtPlotCurve *curve = new QwtPlotCurve("Sine");
-    curve->setData(curveData);
-    curve->setStyle(QwtPlotCurve::Lines);
-    curve->setCurveAttribute(QwtPlotCurve::Fitted, true);
-    curve->setPen(QColor(0, 0, 255, 255), 2);
-    curve->attach(plot);
+//    QwtPointArrayData *curveData = new QwtPointArrayData(xs, ys);
+//    QwtPlotCurve *curve = new QwtPlotCurve("Sine");
+//    curve->setData(curveData);
+//    curve->setStyle(QwtPlotCurve::Lines);
+//    curve->setCurveAttribute(QwtPlotCurve::Fitted, true);
+//    curve->setPen(QColor(0, 0, 255, 255), 2);
+//    curve->attach(plot);
 
+    const double intervalLength = 10.0;
+
+    d_plot = new Plot(this);
+    d_plot->setIntervalLength(intervalLength);
+//    (void) new QwtPlotMagnifier(d_plot->canvas());
+//    (void) new QwtPlotPanner(d_plot->canvas());
 
 
 
@@ -89,7 +96,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget *window = new QWidget;
     QHBoxLayout *layout = new QHBoxLayout;
     layout->addWidget(console);
-    layout->addWidget(plot);
+    layout->addWidget(d_plot);
     window->setLayout(layout);
     setCentralWidget(window);
 
@@ -108,4 +115,9 @@ void MainWindow::readData()
 {
     QByteArray data = serial->readAll();
     console->serialReceived(data);
+}
+
+void MainWindow::start()
+{
+    d_plot->start();
 }

@@ -56,6 +56,21 @@ SignalData::~SignalData()
 
 }
 
+int SignalData::size() const
+{
+    return d_data->values.size();
+}
+
+QPointF SignalData::value(int index) const
+{
+    return d_data->values[index];
+}
+
+QRectF SignalData::boundingRect() const
+{
+    return d_data->boundingRect;
+}
+
 void SignalData::lock()
 {
     d_data->lock.lockForRead();
@@ -92,5 +107,32 @@ void SignalData::append(const QPointF &sample)
     }
 
     d_data->mutex.unlock();
+
+}
+
+void SignalData::clearStaleValues(double limit)
+{
+    d_data->lock.lockForWrite();
+
+    d_data->boundingRect = QRectF( 1.0, 1.0, -2.0, -2.0 ); // invalid
+
+    const QVector<QPointF> values = d_data->values;
+    d_data->values.clear();
+    d_data->values.reserve( values.size() );
+
+    int index;
+    for ( index = values.size() - 1; index >= 0; index-- )
+    {
+        if ( values[index].x() < limit )
+            break;
+    }
+
+    if ( index > 0 )
+        d_data->append( values[index++] );
+
+    while ( index < values.size() - 1 )
+        d_data->append( values[index++] );
+
+    d_data->lock.unlock();
 
 }

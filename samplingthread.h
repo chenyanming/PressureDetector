@@ -10,14 +10,15 @@ class SamplingThread : public QwtSamplingThread
 public:
     SamplingThread(QObject *parent = NULL);
 
-public slots:
-    void setFrequency(double);
+//public slots:
+//    void setFrequency(double);
 
 protected:
     virtual void sample(double elapsed); // sample is pure virtual, in milliseconds
 
 private:
-    double d_frequency;
+    virtual double value(double timeStamp) const;
+//    double d_frequency;
 
 
 
