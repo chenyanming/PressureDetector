@@ -2,23 +2,51 @@
 #define CURVEDATA_H
 
 #include <qwt_series_data.h>
-#include <QPointF>
+#include <qpointer.h>
 
-class SignalData;
+#include <qrect.h>
 
-class CurveData : public QwtSeriesData<QPointF>
+class SignalData
 {
 public:
-    CurveData();
+	SignalData();
+	virtual ~SignalData();
+	void append(const QPointF &pos);
+	void clearStaleValues(double min=-1);
 
-    const SignalData &values() const;
-    SignalData &values();
+	int size() const;
+	QPointF value(int index) const;
+	QPointF lastValue() const;
 
+	QRectF boundingRect() const;
 
-    virtual QPointF sample(size_t i) const;
-    virtual size_t size() const;
+	void lock();
+	void unlock();
 
-    virtual QRectF boundingRect() const;
+private:
+	SignalData(const SignalData &);
+	SignalData &operator=( const SignalData & );
+
+	
+
+	class PrivateData;
+	PrivateData *d_data;
 };
+
+class CurveData: public QwtSeriesData<QPointF>
+{
+public:
+	const SignalData &values() const;
+	SignalData &values();
+
+	virtual QPointF sample(size_t i) const;
+	virtual size_t size() const;
+
+	virtual QRectF boundingRect() const;
+
+protected:
+	SignalData signalData;
+};
+
 
 #endif // CURVEDATA_H

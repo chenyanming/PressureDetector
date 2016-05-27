@@ -1,7 +1,9 @@
 #include "plot.h"
 #include "curvedata.h"
-#include "signaldata.h"
+//#include "signaldata.h"
 #include <qwt_plot_grid.h>
+
+extern CurveData *m_curve0;
 
 Plot::Plot(QWidget *parent):
     QwtPlot(parent),
@@ -35,7 +37,7 @@ Plot::Plot(QWidget *parent):
     d_curve = new QwtPlotCurve();
     d_curve->setStyle(QwtPlotCurve::Lines);
     d_curve->setPen(QColor(0, 0, 255, 255), 2);
-    d_curve->setData(new CurveData);
+    d_curve->setData(m_curve0);
     d_curve->attach(this);
 
 }

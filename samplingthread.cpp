@@ -1,9 +1,26 @@
 #include "samplingthread.h"
 #include <QPoint>
-#include "signaldata.h"
+//#include "signaldata.h"
+//#include "curvedata.h"
 //#include <QtMath>
 #include <qwt_math.h>
 #include <math.h>
+#include <QDebug>
+
+//class CurveData
+//{
+//public:
+//    CurveData();
+//    ~CurveData();
+//    void run()
+//    {
+//        qDebug() << "QUIT.";
+//    }
+//};
+
+#include "curvedata.h"
+extern CurveData *m_curve0;
+
 
 
 SamplingThread::SamplingThread(QObject *parent):
@@ -15,8 +32,14 @@ SamplingThread::SamplingThread(QObject *parent):
 void SamplingThread::sample(double elapsed)
 {
 //    const QPointF s(elapsed, value(elapsed));
-    const QPointF s(elapsed, 10);
-    SignalData::instance().append(s);
+    const QPointF s0(elapsed, 10);
+//    CurveData::instance().append(s);
+//    SignalData<CurveData>::getInstance().run();
+//    SignalData<CurveData>::getInstance().append(s);
+    m_curve0->values().append(s0);
+
+
+//    qDebug() << s;
 
 }
 

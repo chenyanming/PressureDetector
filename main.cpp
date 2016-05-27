@@ -1,6 +1,11 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include "samplingthread.h"
+//#include "signaldata.h"
+#include "curvedata.h"
+
+
+CurveData *m_curve0 = new CurveData();
 
 int main(int argc, char *argv[])
 {
@@ -10,6 +15,11 @@ int main(int argc, char *argv[])
     w.setWindowIcon(QIcon("windowsicon.png"));
     w.resize( 1500, 400 );
 
+//    SignalData<CurveData>::getInstance().run();
+		
+	
+
+	
 
     SamplingThread samplingThread;
     samplingThread.setInterval(10);//Derived from QwtSamplingThread function, 10ms, default 1s.

@@ -2,6 +2,7 @@
 #define SAMPLINGTHREAD_H
 
 #include <qwt_sampling_thread.h>
+#include <qwt_series_data.h>
 
 class SamplingThread : public QwtSamplingThread
 {
