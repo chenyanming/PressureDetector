@@ -27,7 +27,13 @@ private:
     QwtSystemClock d_clock;
 
     QwtPlotCurve *d_curve;
+    QwtPlotCurve *d_curve1;
+    QwtPlotCurve *d_curve2;
+    QwtPlotCurve *d_curve3;
     int d_paintedPoints;
+    int d_paintedPoints1;
+    int d_paintedPoints2;
+    int d_paintedPoints3;
 
     void updateCurve();
     void incrementInterval();

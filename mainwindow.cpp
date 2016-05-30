@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // ! [0]
     // Configure the Serial Port
     serial = new QSerialPort(this);
-    serial->setPortName("com1");
+    serial->setPortName("com4");
     serial->setBaudRate(QSerialPort::Baud9600);
     serial->setDataBits(QSerialPort::Data8);
     serial->setParity(QSerialPort::NoParity);
@@ -101,6 +101,9 @@ MainWindow::MainWindow(QWidget *parent) :
     setCentralWidget(window);
 
 
+
+
+
     // Connect and make it work, read the serial
     connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
 
@@ -115,6 +118,7 @@ void MainWindow::readData()
 {
     QByteArray data = serial->readAll();
     console->serialReceived(data);
+
 }
 
 void MainWindow::start()
