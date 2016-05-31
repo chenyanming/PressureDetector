@@ -9,22 +9,17 @@ double serialRev3 = 0;
 
 Console::Console()
 {
-
+	// Create a log file
+	consoleLog = new Log(this);
 }
 
 void Console::serialReceived(const QByteArray &data)
 {
+	// Output the received data from serial port directly
    insertPlainText(QString(data));
    // Make the Scrollbar always in the bottom
    QScrollBar *bar = verticalScrollBar();
    bar->setValue(bar->maximum());
-
-   //QString str = "a,,b,c";
-   //QStringList list1 = str.split(',');
-   //// list1: [ "a", "", "b", "c" ]
-   //QStringList list2 = str.split(',', QString::SkipEmptyParts);
-   //// list2: [ "a", "b", "c" ]
-   //qDebug() << list2;
 
    // Split the Qstring - data with space
    QStringList list = (QString(data)).split(' ');
@@ -37,6 +32,14 @@ void Console::serialReceived(const QByteArray &data)
    qDebug() << serialRev1;
    qDebug() << serialRev2;
    qDebug() << serialRev3;
+
+   // Save four sensors' data to the log file
+   consoleLog->data[0] = serialRev0;
+   consoleLog->data[1] = serialRev1;
+   consoleLog->data[2] = serialRev2;
+   consoleLog->data[3] = serialRev3;
+   consoleLog->save();
+   
 
 
 
