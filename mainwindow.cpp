@@ -49,6 +49,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // Add console widget(derived from QTextEdit)
     console = new Console;
     console->setReadOnly(true);
+	//console->resize(500, 200);
+	//qDebug() << console->sizeHint();
     QFont consoleFont("Consolas", 10);
     console->setCurrentFont(consoleFont);
     //qDebug() << console->fontFamily();
@@ -86,6 +88,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     d_plot = new Plot(this);
     d_plot->setIntervalLength(intervalLength);
+	d_plot->resize(500, 500);
 //    (void) new QwtPlotMagnifier(d_plot->canvas());
 //    (void) new QwtPlotPanner(d_plot->canvas());
 

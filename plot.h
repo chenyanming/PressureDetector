@@ -40,7 +40,7 @@ private:
 
     QwtPlotDirectPainter *d_directPainter;
 
-    QwtPlotMarker *d_origin;
+    //QwtPlotMarker *d_origin;
 
 protected:
     virtual void showEvent(QShowEvent *);

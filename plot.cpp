@@ -33,11 +33,11 @@ Plot::Plot(QWidget *parent):
     grid->enableYMin( false );
     grid->attach( this );
 
-    d_origin = new QwtPlotMarker();
-    d_origin->setLineStyle( QwtPlotMarker::Cross );
-    d_origin->setValue( d_interval.minValue() + d_interval.width() / 2.0, 0.0 );
-    d_origin->setLinePen( Qt::gray, 0.0, Qt::DashLine );
-    d_origin->attach( this );
+    //d_origin = new QwtPlotMarker();
+    //d_origin->setLineStyle( QwtPlotMarker::Cross );
+    //d_origin->setValue( d_interval.minValue() + d_interval.width() / 2.0, 0.0 );
+    //d_origin->setLinePen( Qt::gray, 0.0, Qt::DashLine );
+    //d_origin->attach( this );
 
     d_curve = new QwtPlotCurve("ONE");
     d_curve->setStyle(QwtPlotCurve::Lines);
@@ -232,7 +232,7 @@ void Plot::incrementInterval()
     }
     setAxisScaleDiv( QwtPlot::xBottom, scaleDiv );
 
-    d_origin->setValue( d_interval.minValue() + d_interval.width() / 2.0, 0.0 );
+    //d_origin->setValue( d_interval.minValue() + d_interval.width() / 2.0, 0.0 );
 
     d_paintedPoints = 0;
     d_paintedPoints1 = 0;

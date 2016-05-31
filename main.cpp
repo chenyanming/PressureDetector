@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.setWindowTitle("Pressure Detector");
     w.setWindowIcon(QIcon("windowsicon.png"));
-    w.resize( 1500, 400 );
+    w.resize( 850, 500 );
 
 //    SignalData<CurveData>::getInstance().run();
 		
