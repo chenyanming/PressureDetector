@@ -18,13 +18,15 @@ SOURCES += main.cpp\
     console.cpp \
     samplingthread.cpp \
     curvedata.cpp \
-    plot.cpp
+    plot.cpp \
+    log.cpp
 
 HEADERS  += mainwindow.h \
     console.h \
     curvedata.h \
     samplingthread.h \
-    plot.h
+    plot.h \
+    log.h
 
 FORMS    += mainwindow.ui
 

@@ -46,12 +46,12 @@
       <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="Generated Files\Debug">
-      <UniqueIdentifier>{53bfd314-167e-455f-8567-19416cdd310d}</UniqueIdentifier>
+      <UniqueIdentifier>{53541650-a139-48ea-8a93-e0758cae9bc6}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
     <Filter Include="Generated Files\Release">
-      <UniqueIdentifier>{124762a5-fde4-42d3-929f-dbdb1d544ff1}</UniqueIdentifier>
+      <UniqueIdentifier>{55eda770-e1c4-47c9-9992-4e332041395c}</UniqueIdentifier>
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
@@ -61,6 +61,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="curvedata.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -79,6 +82,12 @@
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Release\moc_console.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug\moc_log.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Release\moc_log.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="Debug\moc_mainwindow.cpp">
@@ -102,15 +111,6 @@
     <ClCompile Include="GeneratedFiles\qrc_resources.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="log.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Debug\moc_log.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="Release\moc_log.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="console.h">
@@ -119,6 +119,9 @@
     <ClInclude Include="curvedata.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <CustomBuild Include="log.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
     <CustomBuild Include="mainwindow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -126,9 +129,6 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="samplingthread.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="log.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

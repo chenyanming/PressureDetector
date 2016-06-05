@@ -15,6 +15,11 @@
 
 #include "plot.h"
 
+double serialRev0 = 0;
+double serialRev1 = 0;
+double serialRev2 = 0;
+double serialRev3 = 0;
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -23,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // ! [0]
     // Configure the Serial Port
     serial = new QSerialPort(this);
-    serial->setPortName("com4");
+    serial->setPortName("com3");
     serial->setBaudRate(QSerialPort::Baud9600);
     serial->setDataBits(QSerialPort::Data8);
     serial->setParity(QSerialPort::NoParity);
@@ -107,6 +112,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 
+	// init the serial buffer
+	serialBuffer = "";
+	// Create a log file
+	consoleLog = new Log(this);
     // Connect and make it work, read the serial
     connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
 
@@ -117,11 +126,37 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::readData()
+int MainWindow::readData()
 {
-    QByteArray data = serial->readAll();
-    console->serialReceived(data);
-
+	// read serial data
+	serialData = serial->readAll();
+	// display in the console
+	console->serialReceived(serialData);
+	// accumulate is good way
+	serialBuffer += QString(serialData);
+	//qDebug() << serialBuffer;
+	startIn = serialBuffer.indexOf("START");
+	endIn = serialBuffer.indexOf("END");
+	if ((endIn - startIn) > 15) {
+		//qDebug() << (endIn - startIn); // it should be 22.
+		// parse the four data
+		serialRev0 = serialBuffer.mid(startIn + 6, 3).toDouble();
+		serialRev1 = serialBuffer.mid(startIn + 10, 3).toDouble();
+		serialRev2 = serialBuffer.mid(startIn + 14, 3).toDouble();
+		serialRev3 = serialBuffer.mid(startIn + 18, 3).toDouble();
+		qDebug() << serialRev0 << " " << serialRev1 << " " << serialRev2 << " " << serialRev3 << "\n";
+		// Save four sensors' data to the log file
+		consoleLog->data[0] = serialRev0;
+		consoleLog->data[1] = serialRev1;
+		consoleLog->data[2] = serialRev2;
+		consoleLog->data[3] = serialRev3;
+		consoleLog->save();
+		// clear 
+		startIn = 0;
+		endIn = 0;
+		serialBuffer = "";
+	}
+	return 0;
 }
 
 void MainWindow::start()

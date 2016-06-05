@@ -22,7 +22,7 @@ Plot::Plot(QWidget *parent):
     setAxisTitle(QwtPlot::xBottom, "Time [s]");
     setAxisTitle(QwtPlot::yLeft, "y");
     setAxisScale(QwtPlot::xBottom, d_interval.minValue(), d_interval.maxValue());
-    setAxisScale(QwtPlot::yLeft, -200.0, 200.0);
+    setAxisScale(QwtPlot::yLeft, -1024.0, 1024.0);
     insertLegend(new QwtLegend(), QwtPlot::RightLegend);
 
     QwtPlotGrid *grid = new QwtPlotGrid();
@@ -75,7 +75,7 @@ Plot::~Plot()
 void Plot::start()
 {
     d_clock.start();
-    d_timerId = startTimer(10); //in main(), we set the sampling interval time is 10ms
+    d_timerId = startTimer(100); //in main(), we set the sampling interval time is 10ms
 
 }
 

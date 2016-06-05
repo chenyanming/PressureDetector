@@ -55,7 +55,7 @@ static const uint qt_meta_data_MainWindow[] = {
        1,    0,   19,    2, 0x08 /* Private */,
 
  // slots: parameters
-    QMetaType::Void,
+    QMetaType::Int,
 
        0        // eod
 };
@@ -66,11 +66,11 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         MainWindow *_t = static_cast<MainWindow *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->readData(); break;
+        case 0: { int _r = _t->readData();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = _r; }  break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObject MainWindow::staticMetaObject = {

@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 	
 
     SamplingThread samplingThread;
-    samplingThread.setInterval(10);//Derived from QwtSamplingThread function, 10ms, default 1s.
+    samplingThread.setInterval(100);//Derived from QwtSamplingThread function, 10ms, default 1s.
 
     w.show();
     samplingThread.start();
