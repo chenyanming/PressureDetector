@@ -22,7 +22,7 @@ Plot::Plot(QWidget *parent):
     setAxisTitle(QwtPlot::xBottom, "Time [s]");
     setAxisTitle(QwtPlot::yLeft, "y");
     setAxisScale(QwtPlot::xBottom, d_interval.minValue(), d_interval.maxValue());
-    setAxisScale(QwtPlot::yLeft, -1024.0, 1024.0);
+    setAxisScale(QwtPlot::yLeft, 0.0, 1500.0);
     insertLegend(new QwtLegend(), QwtPlot::RightLegend);
 
     QwtPlotGrid *grid = new QwtPlotGrid();

@@ -14,11 +14,12 @@
 #include <qwt_point_data.h>
 
 #include "plot.h"
+#include "data.h"
 
-double serialRev0 = 0;
-double serialRev1 = 0;
-double serialRev2 = 0;
-double serialRev3 = 0;
+//double serialRev0 = 0; 
+//double serialRev1 = 0;
+//double serialRev2 = 0;
+//double serialRev3 = 0;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -137,20 +138,37 @@ int MainWindow::readData()
 	//qDebug() << serialBuffer;
 	startIn = serialBuffer.indexOf("START");
 	endIn = serialBuffer.indexOf("END");
+	qDebug() << endIn - startIn;
+	//endIn = serialBuffer.indexOf("\r");
+	//serialBuffer.remove(0, endIn);
+	//qDebug() << serialData;
 	if ((endIn - startIn) > 15) {
 		//qDebug() << (endIn - startIn); // it should be 22.
 		// parse the four data
-		serialRev0 = serialBuffer.mid(startIn + 6, 3).toDouble();
-		serialRev1 = serialBuffer.mid(startIn + 10, 3).toDouble();
-		serialRev2 = serialBuffer.mid(startIn + 14, 3).toDouble();
-		serialRev3 = serialBuffer.mid(startIn + 18, 3).toDouble();
-		qDebug() << serialRev0 << " " << serialRev1 << " " << serialRev2 << " " << serialRev3 << "\n";
+		//qDebug() << serialBuffer;
+		serialList = serialBuffer.split(',');
+		qDebug() << serialList.size();
+		if(serialList.size() == 6) {
+			Data::getInstance().PressData.serialRev0 = serialList.at(1).toDouble();
+			Data::getInstance().PressData.serialRev1 = serialList.at(2).toDouble();
+			Data::getInstance().PressData.serialRev2 = serialList.at(3).toDouble();
+			Data::getInstance().PressData.serialRev3 = serialList.at(4).toDouble();
+		}
+		//qDebug() << serialRev0;
+		//qDebug() << serialRev1;
+		//qDebug() << serialRev2;
+		//qDebug() << serialRev3;
+		//serialRev0 = serialBuffer.mid(startIn + 6, 3).toDouble();
+		//serialRev1 = serialBuffer.mid(startIn + 10, 3).toDouble();
+		//serialRev2 = serialBuffer.mid(startIn + 14, 3).toDouble();
+		//serialRev3 = serialBuffer.mid(startIn + 18, 3).toDouble();
+		//qDebug() << serialRev0 << " " << serialRev1 << " " << serialRev2 << " " << serialRev3 << "\n";
 		// Save four sensors' data to the log file
-		consoleLog->data[0] = serialRev0;
-		consoleLog->data[1] = serialRev1;
-		consoleLog->data[2] = serialRev2;
-		consoleLog->data[3] = serialRev3;
-		consoleLog->save();
+		//consoleLog->data[0] = serialRev0;
+		//consoleLog->data[1] = serialRev1;
+		//consoleLog->data[2] = serialRev2;
+		//consoleLog->data[3] = serialRev3;
+		//consoleLog->save();
 		// clear 
 		startIn = 0;
 		endIn = 0;

@@ -32,6 +32,7 @@ private:
     Console *console;
     Plot *d_plot;
 	QString serialBuffer;
+	QStringList serialList;
 	QByteArray serialData;
 	Log *consoleLog;
 	int startIn, endIn;
