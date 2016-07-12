@@ -16,6 +16,12 @@
 #include "plot.h"
 #include "data.h"
 
+//#include <QSqlDatabase>
+//#include <QSqlQuery>
+
+//#include <QQuickWidget>
+#include <QMessageBox>
+
 //double serialRev0 = 0; 
 //double serialRev1 = 0;
 //double serialRev2 = 0;
@@ -29,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // ! [0]
     // Configure the Serial Port
     serial = new QSerialPort(this);
-    serial->setPortName("com3");
+    serial->setPortName("com2");
     serial->setBaudRate(QSerialPort::Baud9600);
     serial->setDataBits(QSerialPort::Data8);
     serial->setParity(QSerialPort::NoParity);
@@ -53,13 +59,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // ! [2]
     // Add console widget(derived from QTextEdit)
-    console = new Console;
-    console->setReadOnly(true);
+//    console = new Console;
+    ui->console->setReadOnly(true);
 	//console->resize(500, 200);
 	//qDebug() << console->sizeHint();
     QFont consoleFont("Consolas", 10);
-    console->setCurrentFont(consoleFont);
+    ui->console->setCurrentFont(consoleFont);
     //qDebug() << console->fontFamily();
+
 
 
     // ! [3]
@@ -92,24 +99,53 @@ MainWindow::MainWindow(QWidget *parent) :
 
     const double intervalLength = 10.0;
 
-    d_plot = new Plot(this);
-    d_plot->setIntervalLength(intervalLength);
-	d_plot->resize(500, 500);
+//    d_plot = new Plot(this);
+    ui->d_plot->setIntervalLength(intervalLength);
+    ui->d_plot->resize(500, 500);
 //    (void) new QwtPlotMagnifier(d_plot->canvas());
 //    (void) new QwtPlotPanner(d_plot->canvas());
 
 
 
+//    QQuickWidget *view = new QQuickWidget;
+//    view->setSource(QUrl::fromLocalFile("places_map.qml"));
+//    ui->horizontalLayout->addWidget(view);
+
+
     // ! [5]
     // Layout of the central window
-    QWidget *window = new QWidget;
-    QHBoxLayout *layout = new QHBoxLayout;
-    layout->addWidget(console);
-    layout->addWidget(d_plot);
-    window->setLayout(layout);
-    setCentralWidget(window);
+//    QWidget *window = new QWidget;
+//    QHBoxLayout *layout = new QHBoxLayout;
+//    layout->addWidget(console);
+//    layout->addWidget(d_plot);
+//    window->setLayout(layout);
+//    setCentralWidget(window);
 
 
+    ui->openButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    //ui->openButton->setIcon(QIcon(":/1465992334_folder_open_GPL.png"));
+    ui->openButton->setEnabled(false);
+
+    ui->printButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    //ui->printButton->setIcon(QIcon(":/1465989469_print_printer_LGPL.png"));
+    ui->printButton->setEnabled(false); // printButton is false at startup
+
+    ui->closeButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    //ui->closeButton->setIcon(QIcon(":/1465992876_Vector-icons_free.png"));
+
+    ui->exportButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    //ui->exportButton->setIcon(QIcon(":/1465995014_pdf_LGPL.png"));
+    ui->exportButton->setEnabled(false); // exportButton is false at startup
+
+    ui->startButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    //ui->startButton->setIcon(QIcon(":/1465993344_run_free.png"));
+
+    ui->stopButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    //ui->stopButton->setIcon(QIcon(":/1465993547_Pause_Icon_free.png"));
+    ui->stopButton->setEnabled(false);
+
+    ui->settingButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+    ui->settingButton->setEnabled(false);
 
 
 
@@ -119,6 +155,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	consoleLog = new Log(this);
     // Connect and make it work, read the serial
     connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
+
+    connect(ui->startButton, SIGNAL(clicked(bool)), SLOT(writeData()));
+    connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(close()));
 
 }
 
@@ -132,13 +171,13 @@ int MainWindow::readData()
 	// read serial data
 	serialData = serial->readAll();
 	// display in the console
-	console->serialReceived(serialData);
+    ui->console->serialReceived(serialData);
 	// accumulate is good way
 	serialBuffer += QString(serialData);
-	//qDebug() << serialBuffer;
+//    qDebug() << serialBuffer;
 	startIn = serialBuffer.indexOf("START");
 	endIn = serialBuffer.indexOf("END");
-	qDebug() << endIn - startIn;
+//	qDebug() << endIn - startIn;
 	//endIn = serialBuffer.indexOf("\r");
 	//serialBuffer.remove(0, endIn);
 	//qDebug() << serialData;
@@ -147,13 +186,22 @@ int MainWindow::readData()
 		// parse the four data
 		//qDebug() << serialBuffer;
 		serialList = serialBuffer.split(',');
-		qDebug() << serialList.size();
+        qDebug() << serialList.size();
 		if(serialList.size() == 6) {
 			Data::getInstance().PressData.serialRev0 = serialList.at(1).toDouble();
 			Data::getInstance().PressData.serialRev1 = serialList.at(2).toDouble();
 			Data::getInstance().PressData.serialRev2 = serialList.at(3).toDouble();
 			Data::getInstance().PressData.serialRev3 = serialList.at(4).toDouble();
-		}
+            consoleLog->data[0] = Data::getInstance().PressData.serialRev0;
+            consoleLog->data[1] = Data::getInstance().PressData.serialRev1;
+            consoleLog->data[2] = Data::getInstance().PressData.serialRev2;
+            consoleLog->data[3] = Data::getInstance().PressData.serialRev3;
+            consoleLog->save();
+        }
+        else
+        {
+//            QMessageBox::warning(NULL, "Warning", "Please input your name.", QMessageBox::Yes);
+        }
 		//qDebug() << serialRev0;
 		//qDebug() << serialRev1;
 		//qDebug() << serialRev2;
@@ -164,20 +212,30 @@ int MainWindow::readData()
 		//serialRev3 = serialBuffer.mid(startIn + 18, 3).toDouble();
 		//qDebug() << serialRev0 << " " << serialRev1 << " " << serialRev2 << " " << serialRev3 << "\n";
 		// Save four sensors' data to the log file
-		//consoleLog->data[0] = serialRev0;
-		//consoleLog->data[1] = serialRev1;
-		//consoleLog->data[2] = serialRev2;
-		//consoleLog->data[3] = serialRev3;
-		//consoleLog->save();
 		// clear 
 		startIn = 0;
 		endIn = 0;
 		serialBuffer = "";
 	}
-	return 0;
+    else
+    {
+
+    }
+    return 0;
 }
 
 void MainWindow::start()
 {
-    d_plot->start();
+    ui->d_plot->start();
 }
+
+void MainWindow::writeData()
+{
+    qDebug() << "Start";
+    serial->write("1");
+
+}
+
+
+
+

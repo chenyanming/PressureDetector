@@ -14,7 +14,7 @@ namespace Ui {
 class MainWindow;
 }
 
-class console;
+//class console;
 
 class MainWindow : public QMainWindow
 {
@@ -29,8 +29,8 @@ private:
     Ui::MainWindow *ui;
     QSerialPort *serial;
     QLabel *status;
-    Console *console;
-    Plot *d_plot;
+//    Console *console;
+//    Plot *d_plot;
 	QString serialBuffer;
 	QStringList serialList;
 	QByteArray serialData;
@@ -39,6 +39,7 @@ private:
 
 private slots:
     int readData();
+    void writeData();
 
 };
 

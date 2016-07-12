@@ -4,7 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui serialport
+QT       += core gui serialport sql qml quick network positioning location quickwidgets
+#QT       += core gui serialport sql quickwidgets
 CONFIG   += qwt
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -19,14 +20,17 @@ SOURCES += main.cpp\
     samplingthread.cpp \
     curvedata.cpp \
     plot.cpp \
-    log.cpp
+    log.cpp \
+    data.cpp
+
 
 HEADERS  += mainwindow.h \
     console.h \
     curvedata.h \
     samplingthread.h \
     plot.h \
-    log.h
+    log.h \
+    data.h
 
 FORMS    += mainwindow.ui
 

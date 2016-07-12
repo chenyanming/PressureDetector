@@ -3,7 +3,8 @@
 #include <QDebug>
 
 
-Console::Console()
+Console::Console(QWidget *parent) :
+    QTextEdit(parent)
 {
 }
 

@@ -8,7 +8,7 @@ class Console : public QTextEdit
 {
     Q_OBJECT
 public:
-    Console();
+    Console(QWidget * = NULL);
     void serialReceived(const QByteArray &data);
 private:
 };

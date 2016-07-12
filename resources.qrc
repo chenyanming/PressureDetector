@@ -1,5 +1,15 @@
 <RCC>
     <qresource prefix="/">
         <file>windowsicon.png</file>
+        <file>1465993344_run_free.png</file>
+        <file>places_map.qml</file>
+        <file>marker.png</file>
+        <file>1465989469_print_printer_LGPL.png</file>
+        <file>1465992334_folder_open_GPL.png</file>
+        <file>1465992876_Vector-icons_free.png</file>
+        <file>1465993547_Pause_Icon_free.png</file>
+        <file>1465995014_pdf_LGPL.png</file>
+        <file>1467123127_Service Manager_free.png</file>
+        <file>1467123158_settings01_free.png</file>
     </qresource>
 </RCC>
