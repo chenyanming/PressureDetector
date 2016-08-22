@@ -2,7 +2,6 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QMessageBox>
-#include <QDateTime>
 
 Log::Log(QObject * parent) : QObject(parent) {
 
@@ -12,8 +11,6 @@ Log::Log(QObject * parent) : QObject(parent) {
 	logDir->setCurrent("C:/log/");
 
 	// Get Current datetime
-	QString strBuffer;
-	QDateTime time;
 	time = QDateTime::currentDateTime();
 	strBuffer = time.toString("yyyy-MM-dd_hhmmss");
 	//qDebug() << strBuffer;
@@ -36,5 +33,5 @@ void Log::save()
 {
 	// Format and write to a file
 	QTextStream out(logFile);
-	out << data[0] << " " << data[1] << " " << data[2] << " " << data[3] << "\n";
+	out << time.toString("yyyy/MM/dd hh:mm:ss:zzz") << " " << data[0] << " " << data[1] << " " << data[2] << " " << data[3] << "\n";
 }

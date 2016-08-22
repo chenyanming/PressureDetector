@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QFile>
 #include <QDir>
+#include <QDateTime>
 
 class Log : public QObject {
 	Q_OBJECT
@@ -17,6 +18,8 @@ public:
 private:
 	QDir *logDir;
 	QFile *logFile;
+	QString strBuffer;
+	QDateTime time;
 	
 };
 #endif // LOG_H
