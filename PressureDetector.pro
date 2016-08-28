@@ -4,8 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui serialport sql qml quick network positioning location quickwidgets
-#QT       += core gui serialport sql quickwidgets
+QT       += core gui serialport printsupport
 CONFIG   += qwt
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets

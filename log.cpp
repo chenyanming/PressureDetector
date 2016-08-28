@@ -33,5 +33,6 @@ void Log::save()
 {
 	// Format and write to a file
 	QTextStream out(logFile);
-	out << time.toString("yyyy/MM/dd hh:mm:ss:zzz") << " " << data[0] << " " << data[1] << " " << data[2] << " " << data[3] << "\n";
+    time = QDateTime::currentDateTime();
+    out << time.toString("yyyy/MM/dd hh:mm:ss:zzz") << " " << data[0] << " " << data[1] << " " << data[2] << " " << data[3] << "\n";
 }

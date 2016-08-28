@@ -218,17 +218,11 @@ Makefile: PressureDetector.pro F:\Qt\Qt5.6.0\5.6\msvc2015_64\mkspecs\win32-msvc2
 		F:\Qt\Qt5.6.0\5.6\msvc2015_64\mkspecs\features\lex.prf \
 		PressureDetector.pro \
 		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\qtmaind.prl \
-		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Location.prl \
-		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5QuickWidgets.prl \
-		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Quick.prl \
+		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5PrintSupport.prl \
 		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Svg.prl \
 		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Widgets.prl \
 		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Gui.prl \
 		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5SerialPort.prl \
-		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Sql.prl \
-		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Qml.prl \
-		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Network.prl \
-		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Positioning.prl \
 		F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Core.prl
 	$(QMAKE) -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile PressureDetector.pro
 F:\Qt\Qt5.6.0\5.6\msvc2015_64\mkspecs\features\spec_pre.prf:
@@ -376,17 +370,11 @@ F:\Qt\Qt5.6.0\5.6\msvc2015_64\mkspecs\features\yacc.prf:
 F:\Qt\Qt5.6.0\5.6\msvc2015_64\mkspecs\features\lex.prf:
 PressureDetector.pro:
 F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\qtmaind.prl:
-F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Location.prl:
-F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5QuickWidgets.prl:
-F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Quick.prl:
+F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5PrintSupport.prl:
 F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Svg.prl:
 F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Widgets.prl:
 F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Gui.prl:
 F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5SerialPort.prl:
-F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Sql.prl:
-F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Qml.prl:
-F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Network.prl:
-F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Positioning.prl:
 F:\Qt\Qt5.6.0\5.6\msvc2015_64\lib\Qt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -spec win32-msvc2015 "CONFIG+=debug" "CONFIG+=qml_debug" -o Makefile PressureDetector.pro

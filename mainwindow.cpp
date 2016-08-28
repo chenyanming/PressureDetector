@@ -22,6 +22,10 @@
 //#include <QQuickWidget>
 #include <QMessageBox>
 
+// print
+#include <qwt_plot_renderer.h>
+#include <QFileDialog>
+
 //double serialRev0 = 0; 
 //double serialRev1 = 0;
 //double serialRev2 = 0;
@@ -35,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
     // ! [0]
     // Configure the Serial Port
     serial = new QSerialPort(this);
-    serial->setPortName("com2");
+    serial->setPortName("com3");
     serial->setBaudRate(QSerialPort::Baud9600);
     serial->setDataBits(QSerialPort::Data8);
     serial->setParity(QSerialPort::NoParity);
@@ -97,7 +101,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    curve->setPen(QColor(0, 0, 255, 255), 2);
 //    curve->attach(plot);
 
-    const double intervalLength = 10.0;
+    const double intervalLength = 100.0;
 
 //    d_plot = new Plot(this);
     ui->d_plot->setIntervalLength(intervalLength);
@@ -147,46 +151,63 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->settingButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     ui->settingButton->setEnabled(false);
 
+    // Create Sample Thread
+    samplingThread = new SamplingThread;
+    samplingThread->setInterval(100);//Derived from QwtSamplingThread function, 10ms, default 1s.
 
 
 	// init the serial buffer
 	serialBuffer = "";
 	// Create a log file
 	consoleLog = new Log(this);
-    // Connect and make it work, read the serial
-    connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
 
-    connect(ui->startButton, SIGNAL(clicked(bool)), SLOT(writeData()));
+    connect(serial, SIGNAL(readyRead()), this, SLOT(dumpData()));
+    connect(ui->startButton, SIGNAL(clicked(bool)), SLOT(start()));
+    connect(ui->stopButton, SIGNAL(clicked(bool)), SLOT(stop()));
     connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(close()));
+    connect(ui->exportButton, SIGNAL(clicked()), this, SLOT(exportDocument()));
+    connect(ui->intervalBox, SIGNAL(valueChanged(int)), this, SLOT(changeXInterval(int)));
+
+
 
 }
 
 MainWindow::~MainWindow()
 {
+    // Stop Sample Thread
+    samplingThread->stop();
+    samplingThread->wait(1000);
     delete ui;
+}
+
+void MainWindow::dumpData()
+{
+    serialData = serial->readAll();
 }
 
 int MainWindow::readData()
 {
 	// read serial data
-	serialData = serial->readAll();
+    serialData = serial->readAll();
 	// display in the console
     ui->console->serialReceived(serialData);
 	// accumulate is good way
-	serialBuffer += QString(serialData);
+    serialBuffer += QString(serialData);
 //    qDebug() << serialBuffer;
 	startIn = serialBuffer.indexOf("START");
+    serialBuffer = serialBuffer.mid(startIn); // Delete the characters before "START". It is very important!
 	endIn = serialBuffer.indexOf("END");
 //	qDebug() << endIn - startIn;
 	//endIn = serialBuffer.indexOf("\r");
 	//serialBuffer.remove(0, endIn);
 	//qDebug() << serialData;
-	if ((endIn - startIn) > 15) {
-		//qDebug() << (endIn - startIn); // it should be 22.
+    if ((endIn - startIn) > 15) {
+//    if (serialData == QString('\n')) {
+        //qDebug() << (endIn - startIn); // it should be 22.
 		// parse the four data
 		//qDebug() << serialBuffer;
 		serialList = serialBuffer.split(',');
-        qDebug() << serialList.size();
+//        qDebug() << serialList.size();
 		if(serialList.size() == 6) {
 			Data::getInstance().PressData.serialRev0 = serialList.at(1).toDouble();
 			Data::getInstance().PressData.serialRev1 = serialList.at(2).toDouble();
@@ -226,16 +247,77 @@ int MainWindow::readData()
 
 void MainWindow::start()
 {
+    // Start the Sample Thread and polting
+    qDebug() << "Start......";
+    ui->startButton->setEnabled(false);
+    ui->stopButton->setEnabled(true);
+    disconnect(serial, SIGNAL(readyRead()), this, SLOT(dumpData()));
+    connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
+    samplingThread->start();
     ui->d_plot->start();
 }
 
-void MainWindow::writeData()
+void MainWindow::stop()
 {
-    qDebug() << "Start";
-    serial->write("1");
+    qDebug() << "Stop!!";
+    ui->stopButton->setEnabled(false);
+    ui->exportButton->setEnabled(true);
+    samplingThread->stop();
+    ui->d_plot->stop();
+    disconnect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
+    connect(serial, SIGNAL(readyRead()), this, SLOT(dumpData()));
+}
+
+int MainWindow::exportDocument()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Save as PDF..."), QString(), "*.pdf");
+    if (!fileName.isEmpty()) {
+        // if suffix is empty, use .pdf as default value
+        if (QFileInfo(fileName).suffix().isEmpty())
+            fileName.append(".pdf");
+        QPrinter *printer = new QPrinter(QPrinter::HighResolution);
+        printer->setPageOrientation(QPageLayout::Landscape);
+        printer->setPaperSize(QPrinter::A4);
+        printer->setOutputFormat(QPrinter::PdfFormat);
+        printer->setOutputFileName(fileName);
+
+
+        QPainter painter;
+        if (!painter.begin(printer)) { // failed to open file
+            qWarning("failed to open file, is it writable?");
+            return 1;
+        }
+        painter.drawText(100, 100, "Pressure Detector Data Graph");
+
+
+        QwtPlotRenderer renderer;
+
+        qreal qwidth = printer->width();
+        qreal qheight = printer->height();
+        qreal x_plot = qwidth*0.1;
+        qreal y_plot = qwidth*0.05;
+        qreal w_plot = qwidth*0.8;
+        qreal h_plot = qheight*0.8;
+        //qDebug() << x_plot;
+        //qDebug() << y_plot;
+        //qDebug() << w_plot;
+        //qDebug() << h_plot;
+        renderer.render(ui->d_plot, &painter, QRectF(x_plot, y_plot, w_plot, h_plot));
+
+        painter.end();
+    }
+
+    return 0;
 
 }
 
+void MainWindow::changeXInterval(int)
+{
+    //qDebug() << ui->intervalSlider->value();
+    ui->d_plot->setIntervalLength(ui->intervalBox->value());
+    //qDebug() << ui->intervalSlider->value();
+//    ui->intervalBox->setValue(ui->intervalSlider->value());
 
+}
 
 

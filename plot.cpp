@@ -79,6 +79,14 @@ void Plot::start()
 
 }
 
+void Plot::stop()
+{
+    //tempElapsed = d_clock.elapsed();
+    //d_timerId = 0;
+    //stopSignal = true;
+    killTimer(d_timerId);
+}
+
 void Plot::replot()
 {
     CurveData *data = static_cast<CurveData *>(d_curve->data());

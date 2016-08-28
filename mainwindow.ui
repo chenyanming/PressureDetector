@@ -259,6 +259,28 @@ radius: 1.35, stop: 0 #fff, stop: 1 #bbb);
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QSpinBox" name="intervalBox">
+          <property name="minimumSize">
+           <size>
+            <width>60</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>60</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="minimum">
+           <number>100</number>
+          </property>
+          <property name="maximum">
+           <number>2000</number>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
@@ -277,11 +299,6 @@ radius: 1.35, stop: 0 #fff, stop: 1 #bbb);
      </layout>
     </item>
    </layout>
-   <zorder>console</zorder>
-   <zorder>d_plot</zorder>
-   <zorder>startButton</zorder>
-   <zorder>layoutWidget</zorder>
-   <zorder></zorder>
    <zorder></zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -299,15 +316,15 @@ radius: 1.35, stop: 0 #fff, stop: 1 #bbb);
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
   <customwidget>
-   <class>Console</class>
-   <extends>QWidget</extends>
-   <header>console.h</header>
-   <container>1</container>
-  </customwidget>
-  <customwidget>
    <class>Plot</class>
    <extends>QWidget</extends>
    <header>plot.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Console</class>
+   <extends>QWidget</extends>
+   <header>console.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

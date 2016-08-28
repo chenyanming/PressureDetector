@@ -9,6 +9,11 @@ class Plot; // use this statement so that we can declare it in the head file
 #include "console.h"
 #include "plot.h"
 #include "log.h"
+#include "samplingthread.h"
+
+#include <qprinter.h>
+#include <qprintdialog.h>
+#include <qprintpreviewdialog.h>
 
 namespace Ui {
 class MainWindow;
@@ -23,7 +28,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    void start();
+//    void start();
 
 private:
     Ui::MainWindow *ui;
@@ -37,9 +42,18 @@ private:
 	Log *consoleLog;
 	int startIn, endIn;
 
+    SamplingThread *samplingThread;
+
+//    QPrinter printer;
+//    QPrintPreviewDialog preview;
+
 private slots:
     int readData();
-    void writeData();
+    void dumpData();
+    void start();
+    void stop();
+    void changeXInterval(int);
+    int exportDocument();
 
 };
 

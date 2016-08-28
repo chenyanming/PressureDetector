@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include <QApplication>
-#include "samplingthread.h"
 //#include "signaldata.h"
 #include "curvedata.h"
 
@@ -24,17 +23,11 @@ int main(int argc, char *argv[])
 
 	
 
-    SamplingThread samplingThread;
-    samplingThread.setInterval(100);//Derived from QwtSamplingThread function, 10ms, default 1s.
 
     w.show();
-    samplingThread.start();
-    w.start();
 
     bool ok = a.exec();
 
-    samplingThread.stop();
-    samplingThread.wait(1000);
 
     return ok;
 }

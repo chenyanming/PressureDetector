@@ -18,6 +18,7 @@ public:
     virtual ~Plot();
 
     void start();
+    void stop();
     virtual void replot(); // need to define in cpp, if virtual
     virtual bool eventFilter(QObject *, QEvent *);
 
