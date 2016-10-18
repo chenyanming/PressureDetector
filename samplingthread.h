@@ -6,7 +6,7 @@
 
 class SamplingThread : public QwtSamplingThread
 {
-    Q_OBJECT
+    //Q_OBJECT
 
 public:
     SamplingThread(QObject *parent = NULL);
