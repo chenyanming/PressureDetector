@@ -31,6 +31,8 @@
 //double serialRev2 = 0;
 //double serialRev3 = 0;
 
+//int run_main(int argc, char **argv);
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -151,6 +153,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->settingButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     ui->settingButton->setEnabled(false);
 
+    ui->curveButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
     // Create Sample Thread
     samplingThread = new SamplingThread;
     samplingThread->setInterval(100);//Derived from QwtSamplingThread function, 10ms, default 1s.
@@ -167,8 +171,21 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->closeButton, SIGNAL(clicked()), this, SLOT(close()));
     connect(ui->exportButton, SIGNAL(clicked()), this, SLOT(exportDocument()));
     connect(ui->intervalBox, SIGNAL(valueChanged(int)), this, SLOT(changeXInterval(int)));
+	connect(ui->curveButton, SIGNAL(clicked()), this, SLOT(curve()));
 
 
+	// initial mcl runtime
+	mclmcrInitialize();
+	// initial app
+	if (!mclInitializeApplication(NULL, 0)) {
+		std::cerr << "could not initialize the application properly" << std::endl;
+		//return -1;
+	}
+	// initial lib
+	if (!energyExpenditureInitialize()) {
+		std::cerr << "could not initialize the library properly" << std::endl;
+		//return -1;
+	}
 
 }
 
@@ -178,6 +195,11 @@ MainWindow::~MainWindow()
     samplingThread->stop();
     samplingThread->wait(1000);
     delete ui;
+
+	// terminate lib
+	energyExpenditureTerminate();
+	// terminate app
+	mclTerminateApplication();
 }
 
 void MainWindow::dumpData()
@@ -320,4 +342,100 @@ void MainWindow::changeXInterval(int)
 
 }
 
+void MainWindow::curve()
+{
+	try{
+		QString fileName = QFileDialog::getOpenFileName(this, tr("Open File"),
+			"./log",
+			tr("Log File (*.txt)"));
+		if (fileName != NULL)
+		{
+			//double data[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+			//mwArray in1(3, 3, mxDOUBLE_CLASS, mxREAL);
+			//mwArray in2(3, 3, mxDOUBLE_CLASS, mxREAL);
+			mwArray in(fileName.toStdString().c_str());
+			//in1.SetData(data, 9);
+			//in2.SetData(data, 9);
 
+			mwArray out;
+			energyExpenditure(1, out, in);
+			//std::cout << "The handles are ";
+			//std::cout << out << std::endl;
+
+			//QStringList str;
+			//str << "Pressure Value";
+			//str << "Standard Deviation";
+			//str << "Energy Expenditure";
+
+			////HWND centralWidget = (HWND)(this->winId());
+			//HWND centralWidgetPV = (HWND)(ui->dockWidget->winId());
+			//HWND centralWidgetSD = (HWND)(ui->dockWidget_2->winId());
+			//HWND centralWidgetEE = (HWND)(ui->dockWidget_3->winId());
+			//HWND hfigurePV = FindWindow(NULL, str.at(0).toStdWString().c_str());
+			//HWND hfigureSD = FindWindow(NULL, str.at(1).toStdWString().c_str());
+			//HWND hfigureEE = FindWindow(NULL, str.at(2).toStdWString().c_str());
+			//if (NULL == ::SetParent(hfigurePV, centralWidgetPV));
+			//if (NULL == ::SetParent(hfigureSD, centralWidgetSD));
+			//if (NULL == ::SetParent(hfigureEE, centralWidgetEE));
+
+			//////ui->dockWidget
+			//QWidget *widgetPV;
+			//QWidget *widgetSD;
+			//QWidget *widgetEE;
+			//widgetPV = QWidget::find((WId)hfigurePV);
+			//widgetSD = QWidget::find((WId)hfigureSD);
+			//widgetEE = QWidget::find((WId)hfigureEE);
+
+			//ui->dockWidget->setWidget(widgetPV);
+			//ui->dockWidget_2->setWidget(widgetSD);
+			//ui->dockWidget_3->setWidget(widgetEE);
+		}
+
+	}
+	catch (const mwException& e) {
+		std::cerr << e.what() << std::endl;
+		//return -2;
+	}
+	catch (...) {
+		std::cerr << "Unexpected error thrown" << std::endl;
+		//return -3;
+	}
+
+}
+
+//int run_main(int argc, char **argv)
+//{
+//	if (!mclInitializeApplication(NULL, 0)) {
+//		std::cerr << "could not initialize the application properly" << std::endl;
+//		return -1;
+//	}
+//	if (!addmatrixInitialize()) {
+//		std::cerr << "could not initialize the library properly" << std::endl;
+//		return -1;
+//	}
+//	try{
+//		double data[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+//		mwArray in1(3, 3, mxDOUBLE_CLASS, mxREAL);
+//		mwArray in2(3, 3, mxDOUBLE_CLASS, mxREAL);
+//		in1.SetData(data, 9);
+//		in2.SetData(data, 9);
+//		
+//		mwArray out;
+//		addmatrix(1, out, in1, in2);
+//		std::cout << "The value of added matrix is:" << std::endl;
+//		std::cout << out << std::endl;
+//			
+//	}
+//	catch (const mwException& e) {
+//		std::cerr << e.what() << std::endl;
+//		return -2;
+//	}
+//	catch (...) {
+//		std::cerr << "Unexpected error thrown" << std::endl;
+//		return -3;
+//	}
+//	addmatrixTerminate();
+//	mclTerminateApplication();
+//	return 0;
+//
+//}

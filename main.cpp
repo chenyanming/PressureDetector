@@ -8,9 +8,11 @@ CurveData *m_curve0 = new CurveData();
 CurveData *m_curve1 = new CurveData();
 CurveData *m_curve2 = new CurveData();
 CurveData *m_curve3 = new CurveData();
+int run_main(int argc, char **argv);
 
 int main(int argc, char *argv[])
 {
+
     QApplication a(argc, argv);
     MainWindow w;
     w.setWindowTitle("Pressure Detector");
@@ -31,3 +33,4 @@ int main(int argc, char *argv[])
 
     return ok;
 }
+

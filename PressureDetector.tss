@@ -16,5 +16,20 @@
       <string>C:\Users\chandamon\Documents\Qt5.6\PressureDetector\plot.cpp</string>
       <string>C:\Users\chandamon\Documents\Qt5.6\PressureDetector\plot.h</string>
     </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\chandamon\Documents\Qt5.6\PressureDetector\data.h</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\chandamon\Documents\Qt5.6\PressureDetector\log.cpp</string>
+      <string>C:\Users\chandamon\Documents\Qt5.6\PressureDetector\log.h</string>
+    </ArrayOfString>
+  </ArrayOfArrayOfString>
+  <ArrayOfArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\chandamon\Documents\Qt5.6\PressureDetector\matlab\energyExpenditure.h</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\chandamon\Documents\Qt5.6\PressureDetector\matlab\addmatrix.h</string>
+    </ArrayOfString>
   </ArrayOfArrayOfString>
 </ArrayOfArrayOfArrayOfString>

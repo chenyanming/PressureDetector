@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
@@ -217,6 +217,36 @@ radius: 1.35, stop: 0 #fff, stop: 1 #bbb);
           <property name="icon">
            <iconset resource="resources.qrc">
             <normaloff>:/1465993547_Pause_Icon_free.png</normaloff>:/1465993547_Pause_Icon_free.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>50</width>
+            <height>40</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="curveButton">
+          <property name="styleSheet">
+           <string notr="true">QToolButton {
+border:none;
+}
+
+
+QToolButton:hover {
+background: qradialgradient(cx: 0.3, cy: -0.4,
+fx: 0.3, fy: -0.4,
+radius: 1.35, stop: 0 #fff, stop: 1 #bbb);
+}
+</string>
+          </property>
+          <property name="text">
+           <string>Curve</string>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/line_graph_670px_1145539_easyicon.net.png</normaloff>:/line_graph_670px_1145539_easyicon.net.png</iconset>
           </property>
           <property name="iconSize">
            <size>

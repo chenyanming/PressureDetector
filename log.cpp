@@ -7,8 +7,8 @@ Log::Log(QObject * parent) : QObject(parent) {
 
 	// make path and set cu
 	logDir = new QDir();
-	logDir->mkpath("C:/log/");
-	logDir->setCurrent("C:/log/");
+	logDir->mkpath("./log/");
+	logDir->setCurrent("./log/");
 
 	// Get Current datetime
 	time = QDateTime::currentDateTime();
@@ -20,7 +20,7 @@ Log::Log(QObject * parent) : QObject(parent) {
 	if (!logFile->open(QIODevice::WriteOnly | QIODevice::Text))
 	{
 		QMessageBox msgBox;
-		msgBox.setText("Open C:/log/out.txt failed, please check your permission.");
+		msgBox.setText("Open ./log/out.txt failed, please check your permission.");
 	}
 
 }

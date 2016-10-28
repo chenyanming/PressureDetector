@@ -14,6 +14,7 @@ class Plot; // use this statement so that we can declare it in the head file
 #include <qprinter.h>
 #include <qprintdialog.h>
 #include <qprintpreviewdialog.h>
+#include "energyExpenditure.h"
 
 namespace Ui {
 class MainWindow;
@@ -54,6 +55,7 @@ private slots:
     void stop();
     void changeXInterval(int);
     int exportDocument();
+	void curve();
 
 };
 
