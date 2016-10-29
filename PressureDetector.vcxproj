@@ -127,7 +127,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PreprocessorDefinitions>UNICODE;WIN32;WIN64;QT_DLL;QT_NO_DEBUG;NDEBUG;QT_CORE_LIB;QT_GUI_LIB;QT_SERIALPORT_LIB;QT_WIDGETS_LIB;QT_PRINTSUPPORT_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\GeneratedFiles;.;F:\Qt\Qt5.7.0_32\5.7\msvc2013\\include;.\GeneratedFiles\$(ConfigurationName);F:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtCore;F:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtGui;F:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtSerialPort;F:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtWidgets;F:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtPrintSupport;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\GeneratedFiles;.;F:\Qt\Qt5.7.0_64\5.7\msvc2013_64\\include;.\GeneratedFiles\$(ConfigurationName);F:\Qt\Qt5.7.0_64\5.7\msvc2013_64\\include\QtCore;F:\Qt\Qt5.7.0_64\5.7\msvc2013_64\\include\QtGui;F:\Qt\Qt5.7.0_64\5.7\msvc2013_64\\include\QtSerialPort;F:\Qt\Qt5.7.0_64\5.7\msvc2013_64\\include\QtWidgets;F:\Qt\Qt5.7.0_64\5.7\msvc2013_64\\include\QtPrintSupport;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat />
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
@@ -135,9 +135,9 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
-      <AdditionalLibraryDirectories>F:\Qt\Qt5.7.0_32\5.7\msvc2013\\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>F:\Qt\Qt5.7.0_64\5.7\msvc2013_64\\lib;F:\Qt\Qt5.7.0_64\5.7\msvc2013_64\lib\qwt;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5SerialPort.lib;Qt5Widgets.lib;Qt5PrintSupport.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5SerialPort.lib;Qt5Widgets.lib;Qt5PrintSupport.lib;qwt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -273,7 +273,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\Qt\Qt5.7.0_32\5.7\msvc2013\\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing mainwindow.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"F:\Qt\Qt5.7.0_32\5.7\msvc2013\\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I.\GeneratedFiles" "-I." "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtCore" "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtGui" "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtSerialPort" "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtWidgets" "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtPrintSupport"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I.\GeneratedFiles" "-I." "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtCore" "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtGui" "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtSerialPort" "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtWidgets" "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtPrintSupport"</Command>
     </CustomBuild>
     <CustomBuild Include="log.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">F:\Qt\Qt5.7.0_32\5.7\msvc2013\\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -291,7 +291,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\Qt\Qt5.7.0_32\5.7\msvc2013\\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing log.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"F:\Qt\Qt5.7.0_32\5.7\msvc2013\\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I.\GeneratedFiles" "-I." "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtCore" "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtGui" "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtSerialPort" "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtWidgets" "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtPrintSupport"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I.\GeneratedFiles" "-I." "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtCore" "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtGui" "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtSerialPort" "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtWidgets" "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtPrintSupport"</Command>
     </CustomBuild>
     <CustomBuild Include="console.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">F:\Qt\Qt5.7.0_32\5.7\msvc2013\\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -309,7 +309,7 @@
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">F:\Qt\Qt5.7.0_32\5.7\msvc2013\\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Moc%27ing console.h...</Message>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
-      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"F:\Qt\Qt5.7.0_32\5.7\msvc2013\\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I.\GeneratedFiles" "-I." "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtCore" "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtGui" "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtSerialPort" "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtWidgets" "-IF:\Qt\Qt5.7.0_32\5.7\msvc2013\\include\QtPrintSupport"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SERIALPORT_LIB -DQT_WIDGETS_LIB -DQT_PRINTSUPPORT_LIB  "-I.\GeneratedFiles" "-I." "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtCore" "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtGui" "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtSerialPort" "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtWidgets" "-IF:\Qt\Qt5.7.0_64\5.7\msvc2013_64\include\QtPrintSupport"</Command>
     </CustomBuild>
     <CustomBuild Include="curvedata.h">
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -855,7 +855,7 @@
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_Win32="Qt5.7.0_32_Dynamic" MocOptions="" />
+      <UserProperties MocDir=".\GeneratedFiles\$(ConfigurationName)" UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" lupdateOptions="" lupdateOnBuild="0" lreleaseOptions="" Qt5Version_x0020_Win32="Qt5.7.0_32_Dynamic" Qt5Version_x0020_x64="Qt5.7.0_64" MocOptions="" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
