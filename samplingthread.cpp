@@ -24,6 +24,7 @@ extern CurveData *m_curve0;
 extern CurveData *m_curve1;
 extern CurveData *m_curve2;
 extern CurveData *m_curve3;
+extern CurveData *m_curve4;
 
 //extern double serialRev0;
 //extern double serialRev1;
@@ -57,8 +58,25 @@ void SamplingThread::sample(double elapsed)
     m_curve2->values().append(s2);
     m_curve3->values().append(s3);
 
-
-//    qDebug() << s;
+	// standev
+	sum.push_back(s0.y() + s1.y() + s2.y() + s3.y());
+	static int index = 0;
+	if (sum.size() >= 100) {
+		//qDebug() << sum;
+		double mean = std::accumulate(sum.begin()+index, sum.begin()+index+99, 0.0) / 100;
+		std::vector<double> diff(sum.size());
+		std::transform(sum.begin()+index, sum.begin()+index+99, diff.begin(), [mean](double x) { return x - mean; });
+		double sq_sum = std::inner_product(diff.begin(), diff.end(), diff.begin(), 0.0);
+		double stdev = std::sqrt(sq_sum / 100);
+		// energy expenditure
+		Data::getInstance().PressData.ev = 0.282423 + stdev * 0.00044;
+		index++;
+		//qDebug() << ev;
+	}
+	
+	// line 5: energy expenditure
+	const QPointF s4(elapsed, Data::getInstance().PressData.ev);
+    m_curve4->values().append(s4);
 
 }
 

@@ -31,10 +31,12 @@ private:
     QwtPlotCurve *d_curve1;
     QwtPlotCurve *d_curve2;
     QwtPlotCurve *d_curve3;
+    QwtPlotCurve *d_curve4;
     int d_paintedPoints;
     int d_paintedPoints1;
     int d_paintedPoints2;
     int d_paintedPoints3;
+    int d_paintedPoints4;
 
     void updateCurve();
     void incrementInterval();

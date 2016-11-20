@@ -172,6 +172,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->exportButton, SIGNAL(clicked()), this, SLOT(exportDocument()));
     connect(ui->intervalBox, SIGNAL(valueChanged(int)), this, SLOT(changeXInterval(int)));
 	connect(ui->curveButton, SIGNAL(clicked()), this, SLOT(curve()));
+    connect(ui->stopButton, SIGNAL(clicked(bool)), SLOT(curveNOW()));
+
 
 
 	// initial mcl runtime
@@ -239,6 +241,7 @@ int MainWindow::readData()
             consoleLog->data[1] = Data::getInstance().PressData.serialRev1;
             consoleLog->data[2] = Data::getInstance().PressData.serialRev2;
             consoleLog->data[3] = Data::getInstance().PressData.serialRev3;
+			ui->evLabel->setText(QString::number(Data::getInstance().PressData.ev)); // set the ev to evLabel
             consoleLog->save();
         }
         else
@@ -399,6 +402,29 @@ void MainWindow::curve()
 	catch (...) {
 		std::cerr << "Unexpected error thrown" << std::endl;
 		//return -3;
+	}
+
+}
+
+
+// draw the curves after clicking stop
+void MainWindow::curveNOW()
+{
+	try{
+		QString fileName = Data::getInstance().PressData.logFile;
+		if (fileName != NULL)
+		{
+			mwArray in(fileName.toStdString().c_str());
+			mwArray out;
+			energyExpenditure(1, out, in);
+		}
+
+	}
+	catch (const mwException& e) {
+		std::cerr << e.what() << std::endl;
+	}
+	catch (...) {
+		std::cerr << "Unexpected error thrown" << std::endl;
 	}
 
 }

@@ -20,8 +20,7 @@ protected:
 private:
     virtual double value(double timeStamp) const;
 //    double d_frequency;
-
-
+	std::vector<double> sum;
 
 };
 

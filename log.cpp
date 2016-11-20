@@ -2,6 +2,7 @@
 #include <QTextStream>
 #include <QDebug>
 #include <QMessageBox>
+#include "data.h"
 
 Log::Log(QObject * parent) : QObject(parent) {
 
@@ -14,6 +15,7 @@ Log::Log(QObject * parent) : QObject(parent) {
 	time = QDateTime::currentDateTime();
 	strBuffer = time.toString("yyyy-MM-dd_hhmmss");
 	//qDebug() << strBuffer;
+	Data::getInstance().PressData.logFile = strBuffer + ".txt"; // pass the logfile name to Data object
 
 	// open a file
 	logFile = new QFile(logDir->filePath(strBuffer + ".txt"));

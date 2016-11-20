@@ -1,5 +1,6 @@
 ﻿#ifndef DATA_H
 #define DATA_H
+#include <QString>
 
 class Data {
 public:
@@ -11,6 +12,8 @@ public:
 		double serialRev1;
 		double serialRev2;
 		double serialRev3;
+		double ev;
+		QString logFile;
 	};
 	Data1 PressData;
 

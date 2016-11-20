@@ -8,6 +8,7 @@ extern CurveData *m_curve0;
 extern CurveData *m_curve1;
 extern CurveData *m_curve2;
 extern CurveData *m_curve3;
+extern CurveData *m_curve4;
 
 Plot::Plot(QWidget *parent):
     QwtPlot(parent),
@@ -63,6 +64,12 @@ Plot::Plot(QWidget *parent):
     d_curve3->setData(m_curve3);
     d_curve3->attach(this);
 
+    d_curve4 = new QwtPlotCurve("FOUR");
+    d_curve4->setStyle(QwtPlotCurve::Lines);
+    d_curve4->setPen(QColor(0, 0, 255, 255), 1);
+    d_curve4->setData(m_curve4);
+    d_curve4->attach(this);
+
 }
 
 Plot::~Plot()
@@ -101,6 +108,9 @@ void Plot::replot()
     CurveData *data3 = static_cast<CurveData *>(d_curve3->data());
     data3->values().lock();
 
+    CurveData *data4 = static_cast<CurveData *>(d_curve4->data());
+    data4->values().lock();
+
 
     QwtPlot::replot();
     d_paintedPoints = data->size();
@@ -108,10 +118,14 @@ void Plot::replot()
     d_paintedPoints2 = data2->size();
     d_paintedPoints3 = data3->size();
 
+    d_paintedPoints4 = data4->size();
+
     data->values().unlock();
     data1->values().unlock();
     data2->values().unlock();
     data3->values().unlock();
+
+    data4->values().unlock();
 }
 
 void Plot::setIntervalLength( double interval )
@@ -143,6 +157,10 @@ void Plot::updateCurve()
     CurveData *data3 = static_cast<CurveData *>(d_curve3->data());
     data3->values().lock();
     const int numPoints3 = data3->size();
+
+    CurveData *data4 = static_cast<CurveData *>(d_curve4->data());
+    data4->values().lock();
+    const int numPoints4 = data4->size();
 
     if(numPoints > d_paintedPoints)
     {
@@ -212,10 +230,27 @@ void Plot::updateCurve()
         d_paintedPoints3 = numPoints3;
     }
 
+    if(numPoints4 > d_paintedPoints4)
+    {
+        //qDebug() << "numPoints = " << numPoints;
+        //qDebug() << "d_paintedPoints = " << d_paintedPoints;
+        const bool doClip =!canvas()->testAttribute(Qt::WA_PaintOnScreen);
+        if(doClip)
+        {
+            const QwtScaleMap xMap = canvasMap(d_curve4->xAxis());
+            const QwtScaleMap yMap = canvasMap(d_curve4->yAxis());
+            QRectF br = qwtBoundingRect(*data4, d_paintedPoints4 - 1, numPoints4 - 1);
+            const QRect clipRect = QwtScaleMap::transform(xMap, yMap, br).toRect();
+            d_directPainter->setClipRegion(clipRect);
+        }
+        d_directPainter->drawSeries(d_curve4, d_paintedPoints4 - 1, numPoints4 - 1);
+        d_paintedPoints4 = numPoints4;
+    }
     data->values().unlock();
     data1->values().unlock();
     data2->values().unlock();
     data3->values().unlock();
+    data4->values().unlock();
 
 }
 

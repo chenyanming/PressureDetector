@@ -1,6 +1,6 @@
 function [handle]=energyExpenditure (pathStr)
 
-    %fp = fopen('/Users/chandamon/Desktop/TestResults/Test5_5minutes(1-3-1).txt','r');
+    %fp = fopen('C:\Users\chandamon\Desktop\TestResults\Test1_4minutes(1-2-1).txt','r');
     fp = fopen(pathStr,'r');
     formatSpec = '%d/%d/%d %d:%d:%d:%d %d %d %d %d';
     format long g
@@ -58,3 +58,5 @@ function [handle]=energyExpenditure (pathStr)
 
     fclose(fp);
 end
+
+

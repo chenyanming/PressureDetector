@@ -56,6 +56,7 @@ private slots:
     void changeXInterval(int);
     int exportDocument();
 	void curve();
+	void curveNOW();
 
 };
 
