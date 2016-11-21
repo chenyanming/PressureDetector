@@ -1,11 +1,16 @@
 debug/
 GeneratedFiles/
+Generated*.cpp
+Generated*.h
 Win32/
 x64/
 .vs/
 *.sdf
+*.suo
 *.opensdf
+*.aps
 Makefile*
 *.filters
 *.user
+*.orig
 log/
