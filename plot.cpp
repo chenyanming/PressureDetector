@@ -40,31 +40,31 @@ Plot::Plot(QWidget *parent):
     //d_origin->setLinePen( Qt::gray, 0.0, Qt::DashLine );
     //d_origin->attach( this );
 
-    d_curve = new QwtPlotCurve("ONE");
+    d_curve = new QwtPlotCurve("Sensor 1");
     d_curve->setStyle(QwtPlotCurve::Lines);
     d_curve->setPen(QColor(0, 0, 255, 255), 1); // Blue
     d_curve->setData(m_curve0);
     d_curve->attach(this);
 
-    d_curve1 = new QwtPlotCurve("TWO");
+    d_curve1 = new QwtPlotCurve("Sensor 2");
     d_curve1->setStyle(QwtPlotCurve::Lines);
     d_curve1->setPen(QColor(255, 0, 0, 255), 1); // Red
     d_curve1->setData(m_curve1);
     d_curve1->attach(this);
 
-    d_curve2 = new QwtPlotCurve("THREE");
+    d_curve2 = new QwtPlotCurve("Sensor 3");
     d_curve2->setStyle(QwtPlotCurve::Lines);
     d_curve2->setPen(QColor(0, 255, 0, 255), 1);
     d_curve2->setData(m_curve2);
     d_curve2->attach(this);
 
-    d_curve3 = new QwtPlotCurve("FOUR");
+    d_curve3 = new QwtPlotCurve("Sensor 4");
     d_curve3->setStyle(QwtPlotCurve::Lines);
     d_curve3->setPen(QColor(0, 0, 0, 255), 1);
     d_curve3->setData(m_curve3);
     d_curve3->attach(this);
 
-    d_curve4 = new QwtPlotCurve("FOUR");
+    d_curve4 = new QwtPlotCurve("Energy Expenditure");
     d_curve4->setStyle(QwtPlotCurve::Lines);
     d_curve4->setPen(QColor(0, 0, 255, 255), 1);
     d_curve4->setData(m_curve4);
