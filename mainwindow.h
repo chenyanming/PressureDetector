@@ -35,6 +35,10 @@ private:
     Ui::MainWindow *ui;
     QSerialPort *serial;
     QLabel *status;
+	unsigned int portNumber;
+	unsigned int serialPortNumber;
+	QString lastNumberStr;
+
 //    Console *console;
 //    Plot *d_plot;
 	QString serialBuffer;
@@ -57,6 +61,7 @@ private slots:
     int exportDocument();
 	void curve();
 	void curveNOW();
+	void getPortNumber(QString numberStr);
 
 };
 

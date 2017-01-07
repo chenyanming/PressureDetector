@@ -40,28 +40,28 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     // ! [0]
     // Configure the Serial Port
-    serial = new QSerialPort(this);
-    serial->setPortName("com3");
-    serial->setBaudRate(QSerialPort::Baud9600);
-    serial->setDataBits(QSerialPort::Data8);
-    serial->setParity(QSerialPort::NoParity);
-    serial->setStopBits(QSerialPort::OneStop);
-    serial->setFlowControl(QSerialPort::NoFlowControl);
-    serial->open(QIODevice::ReadWrite);
+    //serial = new QSerialPort(this);
+    //serial->setPortName("com3");
+    //serial->setBaudRate(QSerialPort::Baud9600);
+    //serial->setDataBits(QSerialPort::Data8);
+    //serial->setParity(QSerialPort::NoParity);
+    //serial->setStopBits(QSerialPort::OneStop);
+    //serial->setFlowControl(QSerialPort::NoFlowControl);
+    //serial->open(QIODevice::ReadWrite);
 
-    serial->write("Welcome to Pressure Detector.\n");
+    //serial->write("Welcome to Pressure Detector.\n");
 
     // ! [1]
     // Add label widget to status bar, show serial status
-    status = new QLabel(tr("Connected to %1 : Baud Rate %2, Data Bits %3, Parity %4, Stop Bits %5, Flow Control %6")
-                        .arg(serial->portName())
-                        .arg(serial->baudRate())
-                        .arg(serial->dataBits())
-                        .arg(serial->parity())
-                        .arg(serial->stopBits())
-                        .arg(serial->flowControl()));
+    //status = new QLabel(tr("Connected to %1 : Baud Rate %2, Data Bits %3, Parity %4, Stop Bits %5, Flow Control %6")
+    //                    .arg(serial->portName())
+    //                    .arg(serial->baudRate())
+    //                    .arg(serial->dataBits())
+    //                    .arg(serial->parity())
+    //                    .arg(serial->stopBits())
+    //                    .arg(serial->flowControl()));
 
-    ui->statusBar->addWidget(status);
+    //ui->statusBar->addWidget(status);
 
     // ! [2]
     // Add console widget(derived from QTextEdit)
@@ -127,6 +127,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    window->setLayout(layout);
 //    setCentralWidget(window);
 
+	connect(ui->portComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(getPortNumber(QString)));
 
     ui->openButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
     //ui->openButton->setIcon(QIcon(":/1465992334_folder_open_GPL.png"));
@@ -154,6 +155,16 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->settingButton->setEnabled(false);
 
     ui->curveButton->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+
+	// Scan available ports and display
+	QList<QSerialPortInfo> comPorts = QSerialPortInfo::availablePorts();
+	//ui->portComboBox->clear();
+	foreach(QSerialPortInfo port, comPorts) {
+		//qDebug() << port.portName();
+		ui->portComboBox->addItem(port.portName());
+		portNumber = port.portName().mid(3).toUInt();
+	}
+
 
     // Create Sample Thread
     samplingThread = new SamplingThread;
@@ -465,3 +476,29 @@ void MainWindow::curveNOW()
 //	return 0;
 //
 //}
+
+
+void MainWindow::getPortNumber(QString numberStr)
+{
+	if (lastNumberStr != "") {
+		serial->close();
+		delete serial;
+	}
+	serialPortNumber = numberStr.mid(3).toUInt();
+
+    // Configure the Serial Port
+    serial = new QSerialPort(this);
+    serial->setPortName(numberStr);
+    serial->setBaudRate(QSerialPort::Baud9600);
+    serial->setDataBits(QSerialPort::Data8);
+    serial->setParity(QSerialPort::NoParity);
+    serial->setStopBits(QSerialPort::OneStop);
+    serial->setFlowControl(QSerialPort::NoFlowControl);
+    serial->open(QIODevice::ReadWrite);
+
+    serial->write("Welcome to Pressure Detector.\n");
+
+	//emit readyStart();
+
+	lastNumberStr = numberStr;
+}

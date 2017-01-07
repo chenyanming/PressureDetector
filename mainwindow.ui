@@ -27,6 +27,54 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_8">
         <item>
+         <widget class="QLabel" name="label_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>50</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Port:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="portComboBox">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>80</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="line_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QToolButton" name="openButton">
           <property name="mouseTracking">
            <bool>false</bool>
@@ -290,6 +338,13 @@ radius: 1.35, stop: 0 #fff, stop: 1 #bbb);
          </widget>
         </item>
         <item>
+         <widget class="Line" name="line_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QSpinBox" name="intervalBox">
           <property name="minimumSize">
            <size>
@@ -395,7 +450,7 @@ radius: 1.35, stop: 0 #fff, stop: 1 #bbb);
      <x>0</x>
      <y>0</y>
      <width>886</width>
-     <height>25</height>
+     <height>38</height>
     </rect>
    </property>
   </widget>
